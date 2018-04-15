@@ -10,13 +10,18 @@ Chrome を起動し、デベロッパーツールを起動します。
 JavaScript Profiler タブ (あるいは Profile タブ) を選択し、 "Record JavaScript CPU Profile" が選択された状態で、 Load ボタンをクリックし、 app.cpuprofile を読み込みます。
 */
 
+const memo = new Map();
+memo.set(0, 0);
+memo.set(1, 1);
+
+
 function fib(n){
-    if(n === 0){
-        return 0;
-    }else if(n === 1){
-        return 1;
+    if(memo.has(n)){
+        return memo.get(n);
     }
-    return fib(n - 1) + fib(n - 2);
+    const value = fib(n - 1) + fib(n - 2);
+    memo.set(n, value);
+    return value;
 }
 
 const length = 40;
